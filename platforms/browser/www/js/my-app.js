@@ -11,6 +11,9 @@ var mainView = myApp.addView('.view-main', {
     dynamicNavbar: true
 });
 
+window.onerror = function (errorMsg, url, lineNumber) {
+    alert('Error: ' + errorMsg + ' Script: ' + url + ' Line: ' + lineNumber);
+}
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
     console.log("Device is ready!");
