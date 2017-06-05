@@ -110,13 +110,14 @@ $('#formulario').submit(function() {
     var datosUsuario = $("#usuario").val()
     var datosPassword = $("#password").val()
     
-    archivoValidacion = "http://brone.com.ar/actitudeportiva/validacion.php?jsoncallback=?"
+    archivoValidacion = "http:///192.168.21.54/phonegap/Actitud%20Deportiva/www/validacion.php?jsoncallback=?"
     $.getJSON( archivoValidacion, { usuario:datosUsuario ,password:datosPassword})
     .done(function(respuestaServer) {
         
         
         
         if(respuestaServer.validacion == "ok"){
+                      
           
             /// si la validacion es correcta, muestra la pantalla "home"
             
