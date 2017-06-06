@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <!--
+<head> 
+    <!--   
         Customize this policy to fit your own app's needs. For more guidance, see:
             https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
         Some notes:
@@ -19,7 +19,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
-
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
     <!-- Your app title -->
     <title>My App</title>
 
@@ -31,6 +33,10 @@
     <link rel="stylesheet" href="lib/framework7/css/framework7.ios.colors.min.css">
 
     <link rel="stylesheet" href="css/styles.css">
+
+
+
+
 </head>
 
 <body>
@@ -55,13 +61,7 @@
                 <div class="navbar-inner">
                     <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
                     <div class="center sliding">Awesome App</div>
-                    <div class="right">
-                        <!--
-                          Right link contains only icon - additional "icon-only" class
-                          Additional "open-panel" class tells app to open panel when we click on this link
-                        -->
-                        <a href="#" class="link icon-only open-panel"><i class="icon icon-bars"></i></a>
-                    </div>
+                    
                 </div>
             </div>
             <!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
@@ -71,13 +71,66 @@
                     <!-- Scrollable page content -->
                     <div class="page-content">
                         <div class="content-block">
-                            <p>Page content goes here</p>
-                            <!-- Link to another page -->
-                            <a href="index.html">About apps</a>
+                            <div data-role="page" id="inicio">
 
-                            <p>
-                                <script>
-      function validar(){
+                                            <div data-role="header">
+                                                <h1>Autenticacion de Usuario</h1>
+                                            </div>
+                                            
+                                            <div data-role="content">   
+                                                <form id="formulario" >
+                                              
+                                                        <label> Usuarios </label><p>
+                                                        <input type="text" id="uname" name="username"><p>
+                                              
+                                                        <label> Password </label><p>
+                                                        <input type="password" id="pass" name="password" ><p>
+
+                                                        <input type="submit" value="Login" id="botonLogin"><p>
+                                              
+                                                    </form>     
+                                            </div>
+                                             
+                                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Bottom Toolbar-->
+            
+        </div>
+    </div>
+
+
+<script>
+$('#formulario').submit(function() { 
+    
+     
+  // recolecta los valores que inserto el usuario
+    var datosUsuario = $("#uname").val()
+    var datosPassword = $("#pass").val()
+    
+    archivoValidacion = "http://brone.com.ar/actitudeportiva/validacion.php?jsoncallback=?"
+    $.getJSON( archivoValidacion, { usuario:datosUsuario ,password:datosPassword})
+    .done(function(respuestaServer) {
+        
+        
+        
+        if(respuestaServer.validacion == "ok"){
+                      
+          
+            /// si la validacion es correcta, muestra la pantalla "home"
+            
+               window.location.href = "principal.html";
+          
+        }else{
+          
+          showAlert()
+        }
+  
+    })
+
+  function validar(){
     var key = window.localStorage.getItem("uname");
     if(key != null){
       
@@ -88,22 +141,44 @@
       document.write("hola");
     }
   }
-  </script>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Bottom Toolbar-->
-            <div class="toolbar">
-                <div class="toolbar-inner">
-                    <!-- Toolbar links -->
-                    <a href="#" class="link">Link 1</a>
-                    <a href="#" class="link">Link 2</a>
-                </div>
-            </div>
-        </div>
-    </div>
+
+
+    function onDeviceReady() {
+        // Empty
+        window.localStorage.setItem("uname", "username");
+        var nombre = windows.localStorage.nombre(i);
+
+         if(nombre.localStorage == "username"){
+          
+            /// si la validacion es correcta, muestra la pantalla "home"
+            
+           window.location.href = "principal.html";
+          
+        }else{
+          
+          
+        }
+    }
+
+    // alert dialog dismissed
+        function alertDismissed() {
+            // do something
+        }
+
+    // Show a custom alertDismissed
+    //
+    function showAlert() {
+        navigator.notification.alert(
+            'Usuario o Contraseña incorrecta, por favor verifique nuevamente los datos ingresados. En caso de no tener usuario comuncarse con Actitud Deportiva!',  // message
+            alertDismissed,         // callback
+            'Actitud Deportiva',            // title
+            'Aceptar'                  // buttonName
+        );
+    }
+    return false;
+})
     
+</script>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
     <script type="text/javascript" src="js/my-app.js"></script>

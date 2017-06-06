@@ -81,10 +81,10 @@
                                                 <form id="formulario" >
                                               
                                                         <label> Usuarios </label><p>
-                                                        <input type="text" id="usuario" name="usuario"><p>
+                                                        <input type="text" id="uname" name="username"><p>
                                               
                                                         <label> Password </label><p>
-                                                        <input type="password" id="password" name="password" ><p>
+                                                        <input type="password" id="pass" name="password" ><p>
 
                                                         <input type="submit" value="Login" id="botonLogin"><p>
                                               
@@ -107,8 +107,8 @@ $('#formulario').submit(function() {
     
      
   // recolecta los valores que inserto el usuario
-    var datosUsuario = $("#usuario").val()
-    var datosPassword = $("#password").val()
+    var datosUsuario = $("#uname").val()
+    var datosPassword = $("#pass").val()
     
     archivoValidacion = "http://brone.com.ar/actitudeportiva/validacion.php?jsoncallback=?"
     $.getJSON( archivoValidacion, { usuario:datosUsuario ,password:datosPassword})
@@ -121,7 +121,7 @@ $('#formulario').submit(function() {
           
             /// si la validacion es correcta, muestra la pantalla "home"
             
-           window.location="principal.html"
+               window.location.href = "principal.html";
           
         }else{
           
@@ -130,16 +130,19 @@ $('#formulario').submit(function() {
   
     })
 
+
+
+
     function onDeviceReady() {
         // Empty
-        window.localStorage.setItem("nombre", "usuario");
+        window.localStorage.setItem("uname", "username");
         var nombre = windows.localStorage.nombre(i);
 
-         if(nombre.localStorage == "usuario"){
+         if(nombre.localStorage == "username"){
           
             /// si la validacion es correcta, muestra la pantalla "home"
             
-           window.location="principal.html"
+           window.location.href = "principal.html";
           
         }else{
           
